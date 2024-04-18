@@ -1666,23 +1666,11 @@ $(window).on("scroll", function () {
 
 // ---------- LIGHT GALLERY --------------------------------------------------
 $(function(){
-    lightGallery(document.getElementById('lightGallery'), {
-        download: false,
+    lightGallery(document.getElementById("singleSliderContainer"), {
+        plugins: [lgThumbnail],
+        selector: ".slider-item"
     });
-
-    showGalleries();
 });
-
-// SHOW GALLERY
-function showGalleries() {
-    $('.lightgallery').each(function(i, gallery) {
-        lightGallery(gallery, {
-            download: false,
-        });
-    });
-};
-
-
 
 var einvitationCardReload = true;
 
