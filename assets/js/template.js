@@ -1,8 +1,8 @@
-/* 
+/*
     ++++++++++ ATTENTION!!! ++++++++++
     Before including this file
     make sure if your had included JQUERY too
-*/ 
+*/
 
 /*  ================================================
     GENERAL CONFIGURATION
@@ -10,7 +10,7 @@
 
 // ---------- Start Your Journey (Function) --------------------------------------------------
 function startTheJourney() {
-    $('.top-cover').eq(0).addClass('hide');            
+    $('.top-cover').eq(0).addClass('hide');
     $('body').eq(0).css('overflow', 'visible');
 
     if (typeof playMusicOnce === 'function') playMusicOnce();
@@ -23,7 +23,7 @@ function startTheJourney() {
 
                 var duration = parseInt($(el).attr('data-aos-duration') || 0);
                 var delay = parseInt($(el).attr('data-aos-delay') || 0);
-                
+
                 if ($(el).hasClass('aos-animate')) {
                     // Remove 'aos-animate' class
                     $(el).css({
@@ -40,13 +40,13 @@ function startTheJourney() {
                         }).addClass('aos-animate');
                     }, delay);
                 }
-            }            
+            }
         });
     }, 50);
 
     setTimeout(function(){
         $('.top-cover').eq(0).remove();
-    }, 3000);    
+    }, 3000);
 }
 
 // ---------- ALERT --------------------------------------------------
@@ -57,17 +57,17 @@ var $alertText = $('#alert .alert-text');           // Alert Text
 // ---------- Hide Alert (Function) --------------------------------------------------
 function hideAlert() {
     $alert.removeClass();           // Remove All Class
-    $alert.addClass('alert hide');                                        // hiding alert            
+    $alert.addClass('alert hide');                                        // hiding alert
 }
 
 // ---------- Show Alert (Function) --------------------------------------------------
-function showAlert(message, status) {    
+function showAlert(message, status) {
     if (status != '') {
         $alert.removeClass();     // Remove All Class
         $alert.addClass('alert show ' + status);
         $alertText.text(message);
         setTimeout(hideAlert, 3000);
-    }    
+    }
 }
 
 // ---------- Copy to  (Function) --------------------------------------------------
@@ -80,14 +80,14 @@ function copyToClipboard(text) {
         // cant copy when adding below this code
         // dummy.style.display = 'none'
         document.body.appendChild(dummy);
-    
+
         //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
         dummy.value = text;
         dummy.select();
-        
+
         document.execCommand("copy");
         document.body.removeChild(dummy);
-    
+
         // Show Alert
         return showAlert('Berhasil di salin ke papan klip', 'success');
     } else {
@@ -165,7 +165,7 @@ function ajaxCall(data, callback) {
                 }
             },
         });
-    }    
+    }
 }
 
 // ---------- Sending Data And Media BY AJAX --------------------------------------------------
@@ -189,7 +189,7 @@ function ajaxMultiPart(data, beforeSend, callback) {
                 }
             },
         });
-    }    
+    }
 }
 
 
@@ -215,7 +215,7 @@ function sliderOptions() {
         pauseOnHover: false,
         draggable: false,
         touchMove: false
-    };    
+    };
 };
 
 // Is Cover Played
@@ -224,11 +224,11 @@ var isCoverPlayed = false;
 // COVER CONFIGURATION
 (function coverConfiguration() {
 
-    var windowWidth = $(window).width(),                                // Window Width    
+    var windowWidth = $(window).width(),                                // Window Width
         smallScreen = window.matchMedia( "(max-width: 1024px)" );       // Small screen
-    
+
     // If width matched
-    if (windowWidth > '1020' && windowWidth < '1030') {        
+    if (windowWidth > '1020' && windowWidth < '1030') {
         isCoverPlayed = false;      // cover is not played
     }
 
@@ -245,53 +245,53 @@ var isCoverPlayed = false;
             // If element does exist
             if ($(element).length > 0) {
                 // if the position is MAIN
-                if (position == 'MAIN') {                            
-                    // COVERS                    
+                if (position == 'MAIN') {
+                    // COVERS
                     // If Cover Inner does exist
                     if (coverInner.length) {
                         $(coverInner).removeClass('covers');        // Remove class 'covers'
-                        if (details.desktop != '' || details.mobile != '') {                    
+                        if (details.desktop != '' || details.mobile != '') {
                             $(coverInner).addClass('covers');       // Add Class to cover-inner
                         }
-                    }                    
+                    }
                 }
 
                 // if cover has been slicked
                 if ($(element).hasClass('slick-initialized')) {
                     $(element).slick('unslick');      // stop the slider
-                }                
+                }
                 $(element).html('');      // empty element
 
-                // if the small screen does not match (DESKTOP SIZE) 
+                // if the small screen does not match (DESKTOP SIZE)
                 if (!smallScreen.matches) {
                     // if cover desktop is not empty
-                    if (details.desktop != '') {                                            
+                    if (details.desktop != '') {
                         // if the position is MAIN and the cover is not played
                         if (position == 'MAIN' && !isCoverPlayed) {
-                            isCoverPlayed = true;       // Played the cover                     
+                            isCoverPlayed = true;       // Played the cover
                         }
 
-                        $(element).append(details.desktop);     // Append new cover elements into cover                        
-                        $(element).slick(sliderOptions());            // Start the slider                    
+                        $(element).append(details.desktop);     // Append new cover elements into cover
+                        $(element).slick(sliderOptions());            // Start the slider
                         if (coverInner.length) $(coverInner).removeClass('mobile').addClass('desktop');     // Add class desktop
-                    }                    
+                    }
                 } else {
                     // the screen is small (MOBILE SIZE)
                     // if cover desktop is not empty
-                    if (details.mobile != '') {                    
+                    if (details.mobile != '') {
                         // if the position is MAIN and the cover is not played
-                        if (position == 'MAIN' && !isCoverPlayed) {        
-                            isCoverPlayed = true;       // Played the cover                        
+                        if (position == 'MAIN' && !isCoverPlayed) {
+                            isCoverPlayed = true;       // Played the cover
                         }
 
-                        $(element).append(details.mobile);     // Append new cover elements into cover                        
-                        $(element).slick(sliderOptions());            // Start the slider                        
+                        $(element).append(details.mobile);     // Append new cover elements into cover
+                        $(element).slick(sliderOptions());            // Start the slider
                         if (coverInner.length) $(coverInner).removeClass('desktop').addClass('mobile');     // Add class desktop
-                    }    
+                    }
                 }
             }
         });
-    }   
+    }
 }());
 
 
@@ -330,7 +330,7 @@ var isCoverPlayed = false;
                 $('.count-second').text(seconds);
             }
         }
-    }    
+    }
 }());
 
 
@@ -351,7 +351,7 @@ function attendanceToggle(input) {
     if (typeof window.RSVP != 'undefined') {
         come = window.RSVP['button_text']['attend'];            // Attend
         notCome = window.RSVP['button_text']['not_attend'];     // Not Attend
-    }    
+    }
 
     $(attendanceCome).html(come);
     $(attendanceNotCome).html(notCome);
@@ -364,7 +364,7 @@ function attendanceToggle(input) {
         if ($(input).next('.attendance-value.not-come').length > 0) {
             $(attendanceNotCome).html((isFace ? '<i class="fas fa-sad-tear"></i> ' : '') + notCome);
             $('#rsvp-guest-amount').slideUp();
-        }     
+        }
     }
 }
 
@@ -414,12 +414,12 @@ $(document).on('click', '[data-quantity="minus"]', function(e){
     var $input = $(`input[name="${fieldName}"]`);
     var min = $input.attr('min');
     var value = parseInt($input.val()) - 1;
-    
+
     // is editable
     if (!$input.prop('readonly')) {
         // min. value
         if (min !== 'undefined'){
-            min = parseInt(min);            
+            min = parseInt(min);
             if (value <= min) value = min;
         }
 
@@ -459,7 +459,7 @@ $(document).on('change', '[name="nominal"]', function(e){
     e.preventDefault();
     var val = $(this).val();
     var input = $('.insert-nominal');
-    
+
     $(input).slideUp();
     if (parseInt(val) <= 0) {
         if ($(this).is(':checked') == true) {
@@ -502,7 +502,7 @@ $(document).on('submit', '#rsvp-form', function(e){
 
 
 
-/*  ==============================    
+/*  ==============================
         WEDDING GIFT
 ============================== */
 
@@ -602,7 +602,7 @@ $(document).on('submit', '#gift-form', function(e){
 // Select Bank
 var select_bank = function(e) {
     e.preventDefault();
-    var bankId = $(this).val();        
+    var bankId = $(this).val();
     $('.bank-item').removeClass('show');
     $('#savingBook' + bankId).addClass('show');
 }
@@ -616,7 +616,7 @@ var wgu_file = function(e) {
     $(input).trigger('click');
 }
 
-$(document).on('click', '[data-wgu-file]', wgu_file);    
+$(document).on('click', '[data-wgu-file]', wgu_file);
 
 // Wedding Gift Picture
 var wgu_handle_picture = function(e) {
@@ -630,7 +630,7 @@ var wgu_handle_picture = function(e) {
     }
 }
 
-$(document).on('change', 'input#weddingGiftPicture', wgu_handle_picture);    
+$(document).on('change', 'input#weddingGiftPicture', wgu_handle_picture);
 
 // Wedding Gift Next
 var wedding_gift_next = function(e) {
@@ -654,10 +654,10 @@ var weeding_gift_prev = function(e) {
     var newMarginLeft = marginLeft + width;
     if (newMarginLeft < 0) newMarginLeft = 0;
 
-    $('.wedding-gift__first-slide').css('margin-left', newMarginLeft + "px");        
+    $('.wedding-gift__first-slide').css('margin-left', newMarginLeft + "px");
 }
 
-$(document).on('click', '.wedding-gift__prev', weeding_gift_prev);        
+$(document).on('click', '.wedding-gift__prev', weeding_gift_prev);
 
 
 // Wedding Gift Form
@@ -703,7 +703,7 @@ $(document).on('submit', 'form#weddingGiftForm', wedding_gift_form);
 
 
 // Init Wedding Gift
-var init_wedding_gift = function() {        
+var init_wedding_gift = function() {
 
     // Bank Options
     if (typeof window.BANK_OPTIONS !== 'undefined' && window.BANK_OPTIONS) {
@@ -726,7 +726,7 @@ var init_wedding_gift = function() {
                                 },
                                 option: function(item, escape) {
                                     var title = item.title;
-                                    var credential = item.credential;                        
+                                    var credential = item.credential;
                                     return '<div class="item">' +
                                                 '<p class="select-bank__title">' + escape(title) + '</p>' +
                                                 '<p class="select-bank__credential">' + escape(credential) + '</p>' +
@@ -735,14 +735,14 @@ var init_wedding_gift = function() {
                             },
                             onInitialize: function() {
                                 var instance = this;
-        
+
                                 // disabled input
                                 instance.$control_input.attr('readonly', 'readonly');
-        
+
                                 // Document onClick
                                 $(instance.$control).off('click').on('click', function(e){
                                     e.stopPropagation();
-        
+
                                     // is focused
                                     if (instance.isFocused) return false;
                                 });
@@ -783,7 +783,7 @@ $(document).on('click', '[data-modal]', function(e){
     e.preventDefault();
     var element = this;
     var modal = $(element).data('modal');
-    var data = { 
+    var data = {
         'status': 'modal',
         'modal': modal
     }
@@ -826,7 +826,7 @@ $(document).on('click', '[data-delete]', function(e){
             if (typeof allComments === 'function') allComments();
             if (typeof load_comment === 'function') load_comment();
             if (typeof lysha_get_all_comments === 'function') lysha_get_all_comments();
-        }        
+        }
     });
 
 });
@@ -914,7 +914,7 @@ var post_comment = function(e) {
 
     var onError = function(res=null) { afterSend() }
 
-    var afterSend = function() {        
+    var afterSend = function() {
         $(form).find('textarea[name="comment"]').val('');
         $(form).find('input, select, textarea, button').prop('disabled', false);
         $(submitButton).html(submitText);
@@ -1025,7 +1025,7 @@ var isMusicAttemptingToPlay = false,
 
 // Background Music
 (function backgroundMusic() {
-    if (typeof window.MUSIC != 'undefined') {        
+    if (typeof window.MUSIC != 'undefined') {
         var url = window.MUSIC.url,
             box = window.MUSIC.box;
 
@@ -1064,7 +1064,7 @@ var isMusicAttemptingToPlay = false,
                 pauseBoxAnimation();
 
                 isMusicAttemptingToPlay = true;
-                isMusicPlayed = false;                
+                isMusicPlayed = false;
             };
 
             // Play Music
@@ -1076,13 +1076,10 @@ var isMusicAttemptingToPlay = false,
                 if (promise !== undefined) {
                     promise.then(_ => {
                         isMusicPlayed = true;
-                        // console.log('Audio berhasil diputar');
                         playBoxAnimation();
                     }).catch(error => {
                         isMusicPlayed = false;
-                        // console.log('Tidak dapat memutar audio');
                         pauseBoxAnimation();
-                        // console.log(error);
                     });
                 }
             };
@@ -1105,7 +1102,7 @@ var isMusicAttemptingToPlay = false,
             });
 
             // Is Box Hidden?
-            var prevScrollpos = window.pageYOffset; 
+            var prevScrollpos = window.pageYOffset;
             var isBoxHidden = false;
             var boxTimeout;
 
@@ -1126,13 +1123,13 @@ var isMusicAttemptingToPlay = false,
 
                 clearTimeout(boxTimeout);                       // Clear Timeout
                 boxTimeout = setTimeout(showMusicBox, 5000);    // Set Timeout
-            }            
+            }
 
             // Window On Scroll
             $(window).on('scroll', function(){
                 var currentScrollPos = window.pageYOffset;
 
-                if (prevScrollpos > currentScrollPos) {                    
+                if (prevScrollpos > currentScrollPos) {
                     if (isBoxHidden) showMusicBox();
                 } else {
                     if (!isBoxHidden) hideMusicBox();
@@ -1141,7 +1138,7 @@ var isMusicAttemptingToPlay = false,
                 prevScrollpos = currentScrollPos;
             });
 
-        }        
+        }
     }
 }());
 
@@ -1200,7 +1197,7 @@ $(document).ready(function(){
                 }
                 allBank.push(template);
             }
-    
+
             // Options
             var options = {
                 maxItems: 1,
@@ -1291,7 +1288,7 @@ $(document).ready(function(){
                     }
                 ]
         }
-        
+
         var protocolDotsOptions = {
                 centerMode: true,
                 variableWidth: true,
@@ -1309,18 +1306,18 @@ $(document).ready(function(){
                 pauseOnHover: false,
                 draggable: true,
         }
-            
+
         if ($(protocolSlider).hasClass('slick-initialized')) $(protocolSlider).slick('unslick');     // unslick the slider
         if ($(protocolDots).hasClass('slick-initialized')) $(protocolDots).slick('unslick');    // Unslick the dots
 
         $(protocolSlider).slick(protocolOptions);       // slick the slider
         $(protocolDots).slick(protocolDotsOptions);     // slick the dots
-        
+
         // Before Change
         $(protocolSlider).on('beforeChange', function(event, slick, currentSlide, nextSlide){
             if ( nextSlide == 0 ) {
                 var cls = 'slick-current slick-active' + ( protocolOptions.centerMode ? ' slick-center' : '' );
-        
+
                 setTimeout(function() {
                     $( '[data-slick-index="' + slick.$slides.length + '"]' ).addClass( cls ).siblings().removeClass( cls );
                     for (var i = slick.options.slidesToShow - slick.options.slidesToShow; i >= 0; i--) {
@@ -1344,7 +1341,7 @@ function togglePersonInfo() {
         greeting = $(person).find('.person-greeting'),
         info = $(person).find('.person-info');
 
-    if ($(person).length) {            
+    if ($(person).length) {
 
         var showGreeting = function() {
             $(greeting).addClass('show');
@@ -1353,7 +1350,7 @@ function togglePersonInfo() {
             $(greeting).removeClass('show');
         }
         var showInfo = function() {
-            $(info).addClass('show');            
+            $(info).addClass('show');
             hideInfoTimeout = setTimeout(function(){
                 hideInfo();         // Hide Info
                 showGreeting();     // Show Greeting
@@ -1362,16 +1359,16 @@ function togglePersonInfo() {
         var hideInfo = function() {
             $(info).removeClass('show');
             if (typeof hideInfoTimeout != 'undefined') {
-                clearTimeout(hideInfoTimeout);           // Clear Timeout                    
+                clearTimeout(hideInfoTimeout);           // Clear Timeout
             };
         }
-    
+
         $(greeting).hasClass('show') ? hideGreeting() : showGreeting();            // Toggle Greeting
         $(info).hasClass('show') ? hideInfo() : showInfo();                        // Toggle Info
-            
-        if ($(greeting).hasClass('show') === false && $(info).hasClass('show') === false) showGreeting();       // Default Set        
+
+        if ($(greeting).hasClass('show') === false && $(info).hasClass('show') === false) showGreeting();       // Default Set
         if ($(greeting).hasClass('show') && $(info).hasClass('show')) hideInfo();                               // If both is showed
-    }        
+    }
 }
 
 $(function() {
@@ -1416,7 +1413,7 @@ function startSliderSyncing() {
         $(sliderSyncingPreview).slick(sliderSyncingPreviewOptions);
         $(sliderSyncingNav).slick(sliderSyncingNavOptions);
 
-    }   
+    }
 }
 
 // SINGLE SLIDER
@@ -1447,14 +1444,14 @@ function gallerySingleSlider(configs) {
             // configs is an object
             if (typeof configs === 'object') singleSliderOptions = {...singleSliderOptions, ...configs};
 
-            
+
             if ($(singleSliderContainer).hasClass('slick-initialized')) $(singleSliderContainer).slick('unslick');      //  Unslick if it has initialized
             var singleSlider = $(singleSliderContainer).slick(singleSliderOptions);            // Start new slider
 
             // Single Slider On Wheel
             singleSlider.on('wheel', (function(e) {
                 e.preventDefault();
-              
+
                 if (e.originalEvent.deltaY > 0) {
                   $(this).slick('slickNext');
                 } else {
@@ -1471,7 +1468,7 @@ function gallerySingleSlider(configs) {
 
                 if ( nextSlide == 0 ) {
                     var cls = 'slick-current slick-active' + ( singleSliderOptions.centerMode ? ' slick-center' : '' );
-            
+
                     if (singleSliderOptions.infinite === true) {
                         setTimeout(function() {
                             $( '[data-slick-index="' + slick.$slides.length + '"]' ).addClass( cls ).siblings().removeClass( cls );
@@ -1479,7 +1476,7 @@ function gallerySingleSlider(configs) {
                                 $( '[data-slick-index="' + i + '"]' ).addClass( cls );
                             }
                         }, 10 );
-                    }                    
+                    }
                 }
 
             });
@@ -1508,24 +1505,24 @@ function gallerySingleSlider(configs) {
                 $(picture).css('--height', height + 'px');
             });
 
-        }        
-    }    
-}    
+        }
+    }
+}
 
 
 // KAT GALLERY MODERN
 function galleryKatModern() {
     if (typeof window.GALLERY_MODERN != 'undefined' && window.GALLERY_MODERN === true) {
         var galleryModern = $('#katGalleryModern');
-        if (galleryModern.length) { 
+        if (galleryModern.length) {
 
             var imgWrap = $(galleryModern).find('.modern__img-wrap').get(0);
-            var modernList = $(galleryModern).find('.modern__list').children();        
+            var modernList = $(galleryModern).find('.modern__list').children();
             var modulus = modernList.length % 3;
 
             // Modern List
             if (modernList.length) {
-                
+
                 // Moder List
                 $(modernList).each(function(i, list){
                     var margin = 2.5;
@@ -1568,16 +1565,16 @@ function galleryKatModern() {
 
                             }, 350);
                         }
-                    }            
+                    }
                 });
 
                 // Trigger first element
                 $(modernList).eq(0).trigger('click');
 
-            }        
+            }
 
-            // Img Wrap        
-            if (typeof imgWrap != 'undefined') {                    
+            // Img Wrap
+            if (typeof imgWrap != 'undefined') {
                 var margin = 2.5;
                 var width = $(imgWrap).width();
                 width = width - (margin * 2);
@@ -1588,7 +1585,7 @@ function galleryKatModern() {
                 $(imgWrap).css('margin', margin + 'px auto');
             }
         }
-    }    
+    }
 }
 
 
@@ -1642,7 +1639,7 @@ var AOSOptions = {
     disableMutationObserver: false, // disables automatic mutations' detections (advanced)
     debounceDelay: 0, // the delay on debounce used while resizing window (advanced)
     throttleDelay: 0, // the delay on throttle used while scrolling the page (advanced)
-    
+
     // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
     offset: 10, // offset (in px) from the original trigger point
     delay: 0, // values from 0 to 3000, with step 50ms
@@ -1672,7 +1669,7 @@ $(function(){
     lightGallery(document.getElementById('lightGallery'), {
         download: false,
     });
-    
+
     showGalleries();
 });
 
@@ -1693,7 +1690,7 @@ var einvitationCardReload = true;
 var capturing_einvitation_card = function() {
     // not allowed
     if (einvitationCardReload) return false;
-    
+
     const $qrcardWrapper = $('.rsvp-qrcard-wrap');
     const $qrcardImage = $qrcardWrapper.find('.rsvp-qrcard-img');
     const $qrcardButton = $qrcardWrapper.find('.rsvp-confirm-btn');
@@ -1712,7 +1709,7 @@ var capturing_einvitation_card = function() {
             // replace image
             $qrcardImage.attr('src', res.card);
             $qrcardButton.attr('href', res.card);
-            
+
             einvitationCardReload = true;
         }
 
@@ -1735,7 +1732,7 @@ var capturing_einvitation_card = function() {
 var fn_rsvp_init = function() {
 
     var post, request, content, template, changeButton;
-    
+
     if (typeof window.RSVP_DATA != 'undefined') {
         post = window.RSVP_DATA.post;
         request = window.RSVP_DATA.request;
@@ -1751,7 +1748,7 @@ var fn_rsvp_init = function() {
     data.append('post', post);
     data.append('request', request);
     data.append('content', content);
-    data.append('template', template);    
+    data.append('template', template);
 
     var onSuccess = function(res) {
         // content
@@ -1845,7 +1842,7 @@ var fn_rsvp_amount_toggle = function(e) {
             $(window.RSVP_DATA.amountElement).slideDown('slow');
         } else {
             $(window.RSVP_DATA.amountElement).slideUp('slow');
-        }      
+        }
     }
 }
 
@@ -1877,7 +1874,7 @@ function customizationTemplate(data) {
                 $('body')[0].style.setProperty(`--${cssvar}-family`, `"${field.family}", ${field.category}`, 'important');
                 customFontsClass = 'custom-fonts';
             }
-            
+
             // Priority font style
             if (field.style) {
                 $('body')[0].style.setProperty(`--${cssvar}-style`, `${field.style}`, 'important');
@@ -1912,7 +1909,7 @@ function customizationTemplate(data) {
             }
         });
     }
-    
+
     // remove font-css
     $('link.font-css:not(.stay)').remove();
     $('link.font-css').removeClass('stay');
@@ -1944,7 +1941,7 @@ function customizationTemplate(data) {
         // Remove preset classes
         presetClasses.map(x => $('body').removeClass(`${x.replace('preset-', '')} ${x}`));
     }
-    
+
     // Add body class
     $('body').removeClass('custom-fonts').addClass(`${customFontsClass}`);
 
@@ -1959,26 +1956,26 @@ function extractMainDomain(url) {
     // Create an anchor element to parse the URL
     var parser = document.createElement('a');
     parser.href = url;
-  
+
     // Extract the hostname, which includes the subdomain
     var hostname = parser.hostname;
-  
+
     // Split the hostname by dots and take the last two parts
     var parts = hostname.split('.').slice(-2);
-  
+
     // Join the last two parts to get the main domain
     var mainDomain = parts.join('.');
-  
+
     return mainDomain;
 }
-        
+
 // Window visualViewport
 $(window.visualViewport).on('resize', function(){
 
     // body height
     $('body').css({'--body-height': `${window.visualViewport.height}px`});
 
-});               
+});
 
 // Before unload
 $(window).on('beforeunload', function(){
@@ -1991,7 +1988,7 @@ $(window).on('beforeunload', function(){
 window.addEventListener('message', function(event){
     // verify origin
     if (extractMainDomain(event.origin) === extractMainDomain(this.window.location.origin)) {
-        
+
         var action = event.data.action;
 
         // Customize Template
@@ -2041,7 +2038,7 @@ var func_kado_init = function () {
             detailKadoClick();
         }
     };
-    
+
     function detailKadoClick() {
         $(document).on('click', '.wedding-gifts-body .hadiah-card-button', function (e) {
             e.preventDefault();
@@ -2057,10 +2054,10 @@ var func_kado_init = function () {
             showKadoModal(KadoName, KadoAddress, KadoPrice, KadoAmount, KadoWeb, KadoImg, KadoDesc, KadoID, KadoDibeli);
         });
     }
-    
+
     function showKadoModal(KadoName, KadoAddress, KadoPrice, KadoAmount, KadoWeb, KadoImg, KadoDesc, KadoID, KadoDibeli) {
         var data = createFormData('show_modal_kado', 'Is_show');
-        
+
         var onSuccess = function (res) {
             if (res.modal !== '') {
                 openModal(res.modal);
@@ -2084,10 +2081,10 @@ var func_kado_init = function () {
                 CloseModalButton();
             }
         };
-    
+
         postData(data, onSuccess);
     }
-    
+
     function confirmKadoClick() {
         $(document).on('click', '.confirm-kado-btn', function (e) {
             e.preventDefault();
@@ -2098,17 +2095,17 @@ var func_kado_init = function () {
             showConfirmModal(returnKadoID,  returnKadoImg, returnKadoName, returnKadoSisa);
         });
     }
-    
+
     function showConfirmModal(returnKadoID, returnKadoImg, returnKadoName, returnKadoSisa) {
         if ($('.kat__cropper-modal.kado.modal-confirm').length > 0) {
             return;
         }
-    
+
         var data = createFormData('show_confirm_modal', 'is_confirm');
         var onSuccess = function (res) {
             if (res.modal !== '') {
                 openModal(res.modal);
-    
+
                 var ConfirmModal = $('.kat__cropper-modal.kado.modal-confirm');
                 ConfirmModal.find('[name="kado_id"]').val(returnKadoID);
                 ConfirmModal.find('.img-confirm').attr('src', returnKadoImg);
@@ -2118,61 +2115,61 @@ var func_kado_init = function () {
                 CloseModalButton();
             }
         };
-    
+
         postData(data, onSuccess);
     }
-    
+
     function CloseModalButton() {
         $('.close-kado-btn').on('click', function (e) {
             e.preventDefault();
             closeModal();
         });
     }
-    
+
     function sendKado() {
         $(document).off('submit', 'form#frmBuyGift'); // Unbind previous event handler
         $(document).on('submit', 'form#frmBuyGift', function(e){
             e.preventDefault();
-            
+
             var data = new FormData(this);
             var $this = $(this);
             var $submitBtn = $this.find('button.kado-send-btn');
             var submitText = $submitBtn.html();
-            
+
             var onSuccess = function(res) {
                 setTimeout(afterSend, 500);
                 if (res.message) showAlert({ type: 'success', caption: res.message });
                 closeModal();
             }
-            
+
             var onError = function(res=null) {
                 if (res && res.message) showAlert({ type: 'danger', caption: res.message });
                 setTimeout(afterSend, 500);
             }
-            
+
             var beforeSend = function() {
                 $this.find('input, textarea, button').prop('disabled', true);
                 $submitBtn.html(submitText + ' <i class="fas fa-spinner fa-spin"></i>');
             }
-            
+
             var afterSend = function() {
                 $this.find('input, textarea, button').prop('disabled', false);
                 $submitBtn.html(submitText);
             }
-            
+
             postData(data, onSuccess, onError, beforeSend);
-            
+
             return false;
         });
     }
-    
+
     function createFormData(postValue, modalValue) {
         var data = new FormData();
         data.append('post', postValue);
         data.append('modal', modalValue);
         return data;
     }
-    
+
 
     var onError = function (res = null) {
         // alert("An error occurred while processing your request.");
@@ -2190,7 +2187,7 @@ $(document).ready(function(){
 
     // body height
     $('body').css({'--body-height': `${window.visualViewport.height}px`});
-    
+
     // RSVP Inititalization
     if (typeof fn_rsvp_init === 'function') fn_rsvp_init();
 
@@ -2219,7 +2216,7 @@ $(document).ready(function(){
         if (value <= 0) $(input).val(1);
     });
 
-    // ---------- Check nominal (Wedding Gift) value --------------------------------------------------    
+    // ---------- Check nominal (Wedding Gift) value --------------------------------------------------
     $('[name="nominal"]').each(function(i, el){
         if ($(el).is(':checked')) {
             if ($(this).val() <= 0) {
@@ -2233,12 +2230,12 @@ $(document).ready(function(){
     var select = $('select[name="choose_bank"]');
     if (select.length) {
         chooseBank($(select).val());
-    }    
+    }
 
     // ---------- Attendance Toggling --------------------------------------------------
     $.each($('input[name="attendance"]'), function(i, input){
         attendanceToggle(input);
-    }); 
+    });
 
     // ---------- RSVP INNER --------------------------------------------------
     var rsvpInner = $('.rsvp-inner');
@@ -2246,17 +2243,17 @@ $(document).ready(function(){
         // If RSVP Inner has 'come' class
         $(rsvpInner).find('.rsvp-form').fadeOut();
         $(rsvpInner).find('.rsvp-confirm').fadeIn();
-    } 
+    }
     if ($(rsvpInner).hasClass('not-come')) {
         // If RSVP Inner has 'not-come' class
         $(rsvpInner).find('.rsvp-form').fadeOut();
         $(rsvpInner).find('.rsvp-confirm').fadeIn();
-    } 
+    }
     if ($(rsvpInner).hasClass('no-news')) {
         // If RSVP Inner has 'no-news' class
         $(rsvpInner).find('.rsvp-form').fadeIn();
         $(rsvpInner).find('.rsvp-confirm').fadeOut();
-    }    
+    }
 
 });
 

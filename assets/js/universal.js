@@ -37,7 +37,7 @@ var closeModal = function() {
 var hideAlert = function() {
     var $alert = $('#alert');
     $alert.removeClass();               // Remove All Classes
-    $alert.addClass('alert hide');      // hiding alert 
+    $alert.addClass('alert hide');      // hiding alert
 }
 
 // Show Alert
@@ -95,7 +95,7 @@ var postData = function(data, onSuccess, onError=null, beforeSend=null) {
                     if (typeof onSuccess === 'function') onSuccess(res);
                     // Success Message
                     if (typeof res.message !== 'undefined' && res.message) showAlert(res.message, 'success');
-                } 
+                }
 
                 // Error
                 if (res.error === true) {
@@ -124,19 +124,17 @@ var postData = function(data, onSuccess, onError=null, beforeSend=null) {
                     if (evt.lengthComputable) {
                         var percentComplete = evt.loaded / evt.total;
                         //Do something with upload progress
-                        // console.log(percentComplete);
                     }
                 }, false);
-                
+
                 // Download progress
                 xhr.addEventListener("progress", function(evt){
                     if (evt.lengthComputable) {
                         var percentComplete = evt.loaded / evt.total;
                         // Do something with download progress
-                        // console.log(percentComplete);
                     }
                 }, false);
-                
+
                 return xhr;
             }
         });
@@ -167,14 +165,14 @@ var copyToClipboard = function(text) {
         // cant copy when adding below this code
         // dummy.style.display = 'none'
         document.body.appendChild(dummy);
-    
+
         //Be careful if you use texarea. setAttribute('value', value), which works with "input" does not work with "textarea". – Eduard
         dummy.value = text;
         dummy.select();
-        
+
         document.execCommand("copy");
         document.body.removeChild(dummy);
-    
+
         // Show Alert
         return showAlert('Berhasil di salin ke papan klip', 'success');
     } else {
@@ -197,7 +195,7 @@ var getOffset = function(elem) {
     var offsetLeft = 0, offsetTop = 0, parent = elem;
 
     do {
-        if ( !isNaN( elem.offsetLeft ) ) {        
+        if ( !isNaN( elem.offsetLeft ) ) {
             offsetLeft += elem.offsetLeft;
             offsetTop += elem.offsetTop;
             parent = elem;
@@ -205,7 +203,7 @@ var getOffset = function(elem) {
     } while ( elem = elem.offsetParent );
 
     return {
-        left: offsetLeft, 
+        left: offsetLeft,
         top: offsetTop,
         parent: parent
     };
@@ -230,7 +228,6 @@ var generate_tooltip = function() {
 
     // Init Tooltip
     var init_tooltip = function() {
-        // console.log(getOffset(target));
 
         // set width of tooltip to half of window width
         if (window.innerWidth < tooltip.offsetWidth * 1.5) {
@@ -244,7 +241,7 @@ var generate_tooltip = function() {
 
         // Landing
         var landingClassNames = ['background', 'active', 'shown'];
-        if (landingClassNames.some(className => getOffset(target).parent.classList.contains(className))) {        
+        if (landingClassNames.some(className => getOffset(target).parent.classList.contains(className))) {
             pos_top = (getOffset(target).top - tooltip.offsetHeight - 10) - ((getOffset(target).parent.offsetHeight * 12) / 100);
         }
 
@@ -265,7 +262,7 @@ var generate_tooltip = function() {
                 tooltip.classList.remove("right");
             } else {
                 tooltip.classList.remove("left");
-            }            
+            }
         } else {
             tooltip.classList.remove("right");
         }
@@ -340,7 +337,7 @@ var init_selectize = function(el, opt) {
         var select = $(el).selectize(opt);
         if (select.length) {
             $(".selectize-input input").attr('readonly','readonly');
-            return $(select)[0].selectize;        
+            return $(select)[0].selectize;
         }
     }
 }
@@ -381,8 +378,8 @@ var whatsapp_template_selection_options = function(data) {
                 },
                 option: function(item, escape) {
                     var label = item.title || item.body;
-                    return '<div class="item">' + 
-                                '<p style="font-size: 14px;"><strong>' + escape(label) + '</strong></p>' + 
+                    return '<div class="item">' +
+                                '<p style="font-size: 14px;"><strong>' + escape(label) + '</strong></p>' +
                                 (item.body ? '<p class="copied-field" style="display: none;">' + escape(item.body) + '</p>' : '') +
                             '</div>';
                 }
@@ -391,7 +388,7 @@ var whatsapp_template_selection_options = function(data) {
         // Options
         return selectize_options(opt);
     }
-}    
+}
 
 // WhatsApp Template Selection
 var whatsapp_template_selection = function(el, data=[], sel=[]) {
@@ -445,18 +442,18 @@ var guest_group_selection = function(el, data=[], sel=[]) {
         // Selectizing
         var selectize = init_selectize(el, options);
         if (selectize) {
-            // Selected            
+            // Selected
             if (sel) {
                 var selected = selected_selectize(selectize, sel);
             }
         }
-    }            
+    }
 }
 
 
 
 // Counter
-var counter = function(count, bar=null, step=10) {    
+var counter = function(count, bar=null, step=10) {
     if (count.length) {
         if (count.length == -1 && count.text && count.element) {
             return $(count.element).text(count.text);
@@ -492,7 +489,7 @@ var textarea_height = function() {
 }
 
 // Go To
-var goto = function(page) {    
+var goto = function(page) {
     return window.location.href = page;
 }
 
@@ -506,7 +503,7 @@ var goto_handler = function(e) {
 // Go To Handler
 var goto_calculator = function(e) {
     e.preventDefault();
-    
+
     var redirect = $(this).attr('href');
     if (!redirect) redirect = 'https://katsudoto.id/v2/package';
 
@@ -552,8 +549,8 @@ var init_tab = function(parent='') {
 
 // Tab Content Toggle
 var tab_content_toggle = function(e) {
-    e.preventDefault();  
-    var wrapper = $(this).attr('data-tab-wrapper');        
+    e.preventDefault();
+    var wrapper = $(this).attr('data-tab-wrapper');
     var target = $(this).attr('data-tab-content');
 
     // Navs
@@ -564,7 +561,7 @@ var tab_content_toggle = function(e) {
             $($(navs[i]).attr('data-tab-content')).hide();
         }
     }
-            
+
     $(this).addClass('active');
     if ($(target).css('display') == 'none') $(target).show();
 }
@@ -576,7 +573,7 @@ var animateCSS = function(element, animation, speed = '', prefix = 'animate__') 
         const animationInit = `${prefix}animated`;
         const animationSpeed = ( speed != '' ? `${prefix}${speed}` : '' );
         const animationName = `${prefix}${animation}`;
-        
+
         const node = document.querySelector(element);
         // node.classList.add(animationInit, animationName, animationSpeed);
 
@@ -586,7 +583,7 @@ var animateCSS = function(element, animation, speed = '', prefix = 'animate__') 
         function handleAnimationEnd(event) {
             event.stopPropagation();
             // node.classList.remove(animationInit, animationName, animationSpeed);
-            
+
             $(element).removeClass(animationInit + " " + animationName + " " + animationSpeed)
             resolve('Animation ended');
         }
@@ -694,23 +691,23 @@ var accordion_toogle = function(e) {
         for (var i = 0; i < items.length; i++) {
             // Close Accordion
             if ( $(items[i]).hasClass('show') ) {
-                $(items[i]).removeClass('show');                
+                $(items[i]).removeClass('show');
                 $(items[i]).find('.accordion-panel').removeClass('show').slideUp();
-            }            
-        }            
+            }
+        }
 
         // Show Accordion
         if (!isItemShow) {
             $(item).addClass('show');
             $(item).find('.accordion-panel').addClass('show').slideDown();
         }
-        
+
         // Close Accordion
         if (isItemShow) {
             $(item).removeClass('show');
             $(item).find('.accordion-panel').removeClass('show').slideUp();
         }
-        
+
     }
 }
 
@@ -722,7 +719,7 @@ $(document).on('click', '.accordion-label', accordion_toogle);
 $(document).on('keyup', function(e) {
     // Escape
     if (e.key === "Escape") { // escape key maps to keycode `27`
-        
+
         // Close Modal
         if ($('#modal').length) closeModal();
 
@@ -732,11 +729,11 @@ $(document).on('keyup', function(e) {
 
 // Nprogress
 if (typeof NProgress !== 'undefined') {
-    // Show the progress bar 
+    // Show the progress bar
     NProgress.start();
 
     // Increase randomly
-    var nprogressInterval = setInterval(function() { NProgress.inc(); }, 1000);        
+    var nprogressInterval = setInterval(function() { NProgress.inc(); }, 1000);
 
     // Trigger finish when page fully loaded
     $(window).on('load', function () {
@@ -768,9 +765,9 @@ $(document).ready(function(){
 
         // Hide Dropdown
         if (event.target != $('.dropdown-btn')) hide_dropdown();
-        
+
     }
-    
+
 
     // Check if 'pickadate' exists
     if ( $.fn.pickadate ) {
@@ -808,6 +805,6 @@ $(document).ready(function(){
             interval: 15,
         });
     }
-    
+
 
 });
