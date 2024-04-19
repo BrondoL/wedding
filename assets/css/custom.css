@@ -878,12 +878,13 @@ section.cover .inner .foot .prime-title {
 }
 .couple-details .couple-name {
     font-family: var(--body-text-family);
-    font-size: calc(var(--body-text-size) + var(--fs-extra-2));
+    font-size: calc(var(--body-text-size) + 10px);
     font-weight: 700;
     color: var(--text-primary);
 }
 .couple-details .couple-parents {
     font-family: var(--body-text-family);
+    font-size: 17px;
     font-weight: 500;
     color: var(--text-secondary);
 }
