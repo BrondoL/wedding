@@ -7,8 +7,8 @@
     font-display: swap;
 }
 
-/* bintang-wegik */
-body.bintang-wegik {
+/* levri-nabil */
+body.levri-nabil {
     /* Heading Family */
     --heading-family: "Manhattan Signature", serif;
     --heading-style: normal;
@@ -79,7 +79,7 @@ body.bintang-wegik {
 }
 
 /* Original */
-body.bintang-wegik {
+body.levri-nabil {
     /* ornament */
     --bg-desktop: url("../images/bg-desk-min.png");
     --texture-cover: url("../images/texture-cover-min.png");
@@ -89,20 +89,20 @@ body.bintang-wegik {
 
 
 @media only screen and (max-width: 960px) {
-    body.bintang-wegik {
+    body.levri-nabil {
         overflow: hidden;
     }
 }
 
 @media (min-width: 560px) and (max-width: 960px) {
-    body.bintang-wegik {
+    body.levri-nabil {
         --heading-size: 64px;
         --body-text-size: 20px;
     }
 }
 
 @media (min-width: 961px) {
-    body.bintang-wegik {
+    body.levri-nabil {
         --heading-size: 64px;
         --body-text-size: 20px;
     }
@@ -110,12 +110,12 @@ body.bintang-wegik {
 
 
 /* Fonts */
-body.bintang-wegik h1,
-body.bintang-wegik h2,
-body.bintang-wegik h3,
-body.bintang-wegik h4,
-body.bintang-wegik h5,
-body.bintang-wegik h6 {
+body.levri-nabil h1,
+body.levri-nabil h2,
+body.levri-nabil h3,
+body.levri-nabil h4,
+body.levri-nabil h5,
+body.levri-nabil h6 {
     font-family: var(--heading-family);
     font-style: var(--heading-style);
     font-weight: var(--heading-weight);
@@ -124,7 +124,7 @@ body.bintang-wegik h6 {
     line-height: normal;
     color: var(--text-primary);
 }
-body.bintang-wegik p {
+body.levri-nabil p {
     font-family: var(--body-text-family);
     font-style: var(--body-text-style);
     font-weight: var(--body-text-weight);
@@ -133,18 +133,18 @@ body.bintang-wegik p {
     line-height: 1.5;
     color: var(--text-secondary);
 }
-.body.bintang-wegik span {
+.body.levri-nabil span {
     font-family: inherit;
     font-size: inherit;
     color: inherit;
     font-weight: bold;
 }
-body.bintang-wegik sup {
+body.levri-nabil sup {
     font-family: inherit;
     font-size: 0.7em;
     color: inherit;
 }
-body.bintang-wegik font {
+body.levri-nabil font {
     font-family: inherit;
     font-size: inherit;
     color: inherit;
@@ -153,16 +153,16 @@ body.bintang-wegik font {
 }
 
 /* img */
-body.bintang-wegik img {
+body.levri-nabil img {
     max-width: 100%;
 }
 
 /* scrollbar */
-body.bintang-wegik::-webkit-scrollbar {
+body.levri-nabil::-webkit-scrollbar {
     width: 10px;
     height: 15px;
 }
-body.bintang-wegik::-webkit-scrollbar-thumb,
+body.levri-nabil::-webkit-scrollbar-thumb,
 textarea::-webkit-scrollbar-thumb,
 *::-webkit-scrollbar-thumb {
     border-width: 2px;
