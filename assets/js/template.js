@@ -1763,6 +1763,7 @@ $(document).ready(function () {
     lightGallery(document.getElementById("singleSliderContainer"), {
         plugins: [lgThumbnail],
         selector: ".slider-item",
+        getCaptionFromTitleOrAlt: false,
     });
 });
 
