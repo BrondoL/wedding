@@ -2339,8 +2339,8 @@ section.person p {
 
 .logo-wrap .char-2 {
     position: absolute;
-    top: 0;
-    left: 50%;
+    top: -40%;
+    left: 51%;
     width: 87%;
     transform: translate(-24%, 82%);
 }
@@ -2905,4 +2905,18 @@ section.footnote-wrap .orn-footnote-6 .image-wrap img {
 
 .ragu-style p:nth-child(2) {
     font-size: 16px !important;
+}
+
+.tamu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+}
+
+.nama-tamu {
+    margin: 5px 0px;
+    font-weight: bold;
+    font-size: 24px;
 }
