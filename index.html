@@ -1275,7 +1275,7 @@
             <section class="wedding-wish-wrap" data-template>
                 <div class="wedding-wish-inner">
                     <div class="wedding-wish-head">
-                        <h1 class="wedding-wish-title" data-aos="fade-up" data-aos-duration="1200">Ucapan &amp; Harapan
+                        <h1 class="wedding-wish-title" data-aos="fade-up" data-aos-duration="1200">Ucapan &amp; Do'a
                         </h1>
                     </div>
                     <div class="wedding-wish-body">
@@ -1308,7 +1308,7 @@
                                     <input type="hidden" name="code" value>
                                     <input type="hidden" name="post" value="newComment">
                                 </div>
-                                <div class="form-group guest-name-wrap " data-aos="fade-up" data-aos-duration="1200"
+                                <div class="form-group guest-name-wrap" data-aos="fade-up" data-aos-duration="1200"
                                     data-aos-delay="200">
                                     <input type="text" name="name" class="form-control guest-name" placeholder="Nama"
                                         value>
@@ -1318,9 +1318,35 @@
                                     <textarea class="form-control guest-comment" name="comment" rows="1"
                                         placeholder="Berikan ucapan"></textarea>
                                 </div>
+                                <div class="form-group guest-comment-wrap" data-aos="fade-up" data-aos-duration="1200"
+                                    data-aos-delay="300">
+                                    <select class="form-control guest-comment" name="konfirmasi" id="konfirmasi">
+                                        <option disabled selected>Pilih konfirmasi kehadiran:</option>
+                                        <option value="hadir">Hadir</option>
+                                        <option value="tidak_hadir">Tidak Hadir</option>
+                                        <option value="ragu">Masih Ragu</option>
+                                    </select>
+                                    <div class="jumlah-kehadiran" style="display: none;">
+                                        <div class="lbl-guestnumb" style="box-shadow:none; margin:10px 0px; text-align: center; color:
+                                                var(--text-primary);">Jumlah
+                                            Hadir:</div>
+                                        <div class="option-tamu-wrapper">
+                                            <input name="jhadir" type="radio" value="1 Tamu" style="height:10px"
+                                                id="jhadir0">
+                                            <label for="jhadir0"> 1 Tamu</label>
+                                            <input name="jhadir" type="radio" value="2 Tamu" style="height:10px"
+                                                id="jhadir1">
+                                            <label for="jhadir1"> 2 Tamu</label>
+                                            <input name="jhadir" type="radio" value="3 Tamu" style="height:10px"
+                                                id="jhadir2">
+                                            <label for="jhadir2"> 3 Tamu</label>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="submit-comment-wrap" data-aos="fade-up" data-aos-duration="1200"
                                     data-aos-delay="400">
-                                    <button type="submit" class="submit submit-comment" data-last>Kirim</button>
+                                    <button type="submit" class="submit submit-comment" data-last>➤ Kirim</button>
                                 </div>
                             </form>
                         </div>
@@ -1605,6 +1631,17 @@
             const result = urlParams[1].replaceAll("+", " ")
             $(".nama-tamu").text(result);
         }
+
+        // when select with id konfirmasi changed and the value is hadir
+        // show div with class name jumlah-kehadiran
+        $("#konfirmasi").change(function () {
+            if ($(this).val() == "hadir") {
+                $(".jumlah-kehadiran").show();
+            } else {
+                $(".jumlah-kehadiran").hide();
+            }
+            $("#konfirmasi").css("color", "black");
+        });
     </script>
 </body>
 

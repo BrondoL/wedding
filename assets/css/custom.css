@@ -1933,7 +1933,6 @@ section.gallery+section.video-gallery {
     border-radius: 6px;
     padding: 12px;
     font-family: var(--body-text-family);
-    font-size: var(--body-text-size);
     line-height: 1.5;
     color: var(--text-secondary);
 }
@@ -2017,7 +2016,7 @@ section.gallery+section.video-gallery {
 .comment-wrap {
     padding: 0 20px 30px;
     display: none;
-    height: 430px;
+    height: 330px;
     overflow: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -2919,4 +2918,44 @@ section.footnote-wrap .orn-footnote-6 .image-wrap img {
     margin: 5px 0px;
     font-weight: bold;
     font-size: 24px;
+}
+
+.option-tamu-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.option-tamu-wrapper label {
+    user-select: none;
+}
+
+.option-tamu-wrapper input[type="radio"] {
+    display: none;
+}
+
+.option-tamu-wrapper input[type="radio"]+label {
+    z-index: 10;
+    width: 100%;
+    position: relative;
+    color: #818283;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+.option-tamu-wrapper input[type="radio"]:checked+label {
+    color: white;
+    background-color: var(--button-background-primary);
+}
+
+.option-tamu-wrapper input[type="radio"]+label {
+    padding: 7px 10px;
+    border-radius: 5px;
+}
+
+#konfirmasi {
+    color: #9f9f9f;
 }
