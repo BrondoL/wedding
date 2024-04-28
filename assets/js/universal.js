@@ -780,6 +780,9 @@ $(document).ready(function(){
     window.onclick = function(event) {
 
         // Hide Dropdown
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
         if (event.target != $('.dropdown-btn')) hide_dropdown();
 
     }
