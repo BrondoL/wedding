@@ -1282,32 +1282,27 @@
                         <div class="wedding-wish-summary">
                             <div class="header-wishes">
                                 <div>
-                                    <i aria-hidden="true" class="far fa-envelope-open"> </i> <span>9</span>
+                                    <i aria-hidden="true" class="far fa-envelope-open"> </i> <span class="total-kehadiran">9</span>
                                 </div>
                                 <h1 id="wish-head"> Ucapan </h1>
                             </div>
                             <div class="counter-box">
                                 <div class="hadir-style card-kehadiran">
-                                    <p>11</p>
+                                    <p class="total-hadir">11</p>
                                     <p>Hadir</p>
                                 </div>
                                 <div class="thadir-style card-kehadiran">
-                                    <p>1</p>
+                                    <p class="total-tidak-hadir">1</p>
                                     <p> Tidak Hadir </p>
                                 </div>
                                 <div class="ragu-style card-kehadiran">
-                                    <p>0</p>
+                                    <p class="total-ragu">0</p>
                                     <p>Ragu</p>
                                 </div>
                             </div>
                         </div>
                         <div class="wedding-wish-form">
-                            <form action class method="POST" id="weddingWishForm">
-                                <div>
-                                    <input type="hidden" name="guestId" value>
-                                    <input type="hidden" name="code" value>
-                                    <input type="hidden" name="post" value="newComment">
-                                </div>
+                            <form action method="POST" id="weddingWishForm">
                                 <div class="form-group guest-name-wrap" data-aos="fade-up" data-aos-duration="1200"
                                     data-aos-delay="200">
                                     <input type="text" name="name" class="form-control guest-name" placeholder="Nama"
@@ -1315,15 +1310,15 @@
                                 </div>
                                 <div class="form-group guest-comment-wrap" data-aos="fade-up" data-aos-duration="1200"
                                     data-aos-delay="300">
-                                    <textarea class="form-control guest-comment" name="comment" rows="1"
+                                    <textarea class="form-control guest-comment" name="description" rows="1"
                                         placeholder="Berikan ucapan"></textarea>
                                 </div>
                                 <div class="form-group guest-comment-wrap" data-aos="fade-up" data-aos-duration="1200"
                                     data-aos-delay="300">
-                                    <select class="form-control guest-comment" name="konfirmasi" id="konfirmasi">
+                                    <select class="form-control guest-comment" name="status" id="konfirmasi">
                                         <option disabled selected>Pilih konfirmasi kehadiran:</option>
                                         <option value="hadir">Hadir</option>
-                                        <option value="tidak_hadir">Tidak Hadir</option>
+                                        <option value="tidak hadir">Tidak Hadir</option>
                                         <option value="ragu">Masih Ragu</option>
                                     </select>
                                     <div class="jumlah-kehadiran" style="display: none;">
@@ -1331,13 +1326,13 @@
                                                 var(--text-primary);">Jumlah
                                             Hadir:</div>
                                         <div class="option-tamu-wrapper">
-                                            <input name="jhadir" type="radio" value="1 Tamu" style="height:10px"
+                                            <input name="number" type="radio" value="1" style="height:10px"
                                                 id="jhadir0">
                                             <label for="jhadir0"> 1 Tamu</label>
-                                            <input name="jhadir" type="radio" value="2 Tamu" style="height:10px"
+                                            <input name="number" type="radio" value="2" style="height:10px"
                                                 id="jhadir1">
                                             <label for="jhadir1"> 2 Tamu</label>
-                                            <input name="jhadir" type="radio" value="3 Tamu" style="height:10px"
+                                            <input name="number" type="radio" value="3" style="height:10px"
                                                 id="jhadir2">
                                             <label for="jhadir2"> 3 Tamu</label>
                                         </div>
@@ -1557,16 +1552,6 @@
             'slider': '#protocol-slider',
             'dots': '#protocol-dots'
         };
-
-        // RSVP Data
-        var RSVP_DATA = {
-            post: 'rsvp_request',
-            request: 'get_rsvp',
-            content: '',
-            template: 'default_v2_rsvp',
-            changeButton: '#changeRSVP',
-            amountElement: '#rsvpAmountWrap'
-        }
     </script>
 
     <div class="alert" id="alert">
@@ -1585,6 +1570,7 @@
     <script src="assets/js/universal.js?1713350174"></script>
     <script src="assets/js/template.js?1713350174"></script>
     <script src="assets/js/custom.js?1713350174"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
     <script>
         (function () {
             if (!document.body) return;

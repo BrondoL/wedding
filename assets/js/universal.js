@@ -68,75 +68,91 @@ var hideLoader = function() {
 }
 
 // Post Data
-var postData = function(data, onSuccess, onError=null, beforeSend=null) {
+var postData = function({path, data}, onSuccess, onError=null, beforeSend=null) {
     if (data) {
         $.ajax({
-            url: (data.url ? data.url : ''),
-            type: 'post',
-            dataType: 'json',
-            data: data,
+            url: `http://localhost:8001/${path}`,
+            type: "POST",
+            data: JSON.stringify(data),
             cache: false,
             processData: false,
-            contentType: false,
-            beforeSend: function() {
+            contentType: "application/json",
+            beforeSend: function () {
                 // Before Send
-                if (typeof beforeSend === 'function') beforeSend();
+                if (typeof beforeSend === "function") beforeSend();
 
                 // Show Loader
-                if (data.isShowLoader && data.isShowLoader === true) showLoader();
+                if (data.isShowLoader && data.isShowLoader === true)
+                    showLoader();
             },
-            success: function(res){
+            success: function (res) {
                 // Hide Loader
-                if (data.isShowLoader && data.isShowLoader === true) hideLoader();
+                if (data.isShowLoader && data.isShowLoader === true)
+                    hideLoader();
 
                 // Success
-                if (res.error === false) {
+                if (res.code === 200 | res.code === 201) {
                     // On Success
-                    if (typeof onSuccess === 'function') onSuccess(res);
+                    if (typeof onSuccess === "function") onSuccess(res);
                     // Success Message
-                    if (typeof res.message !== 'undefined' && res.message) showAlert(res.message, 'success');
+                    if (typeof res.message !== "undefined" && res.message)
+                        showAlert(res.message, "success");
                 }
 
                 // Error
                 if (res.error === true) {
                     // On Error
-                    if (typeof onError === 'function') onError(res);
+                    if (typeof onError === "function") onError(res);
                     // Error Message
-                    if (typeof res.message !== 'undefined' && res.message) showAlert(res.message, 'error');
+                    if (typeof res.message !== "undefined" && res.message)
+                        showAlert(res.message, "error");
                 }
             },
-            error: function(jqXHR){
+            error: function (jqXHR) {
                 var res;
 
                 try {
                     // Parse Response Text
-                    res = jqXHR.responseText ? JSON.parse(jqXHR.responseText) : '';
-                } catch(err) {}
+                    res = jqXHR.responseText
+                        ? JSON.parse(jqXHR.responseText)
+                        : "";
+                } catch (err) {}
 
                 // On Error
-                if (typeof onError === 'function') onError(res);
+                if (typeof onError === "function") {
+                    onError(res);
+                    showAlert(res.message, "error");
+                }
             },
-            xhr: function() {
+            xhr: function () {
                 var xhr = new window.XMLHttpRequest();
 
                 // Upload progress
-                xhr.upload.addEventListener("progress", function(evt){
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        //Do something with upload progress
-                    }
-                }, false);
+                xhr.upload.addEventListener(
+                    "progress",
+                    function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            //Do something with upload progress
+                        }
+                    },
+                    false
+                );
 
                 // Download progress
-                xhr.addEventListener("progress", function(evt){
-                    if (evt.lengthComputable) {
-                        var percentComplete = evt.loaded / evt.total;
-                        // Do something with download progress
-                    }
-                }, false);
+                xhr.addEventListener(
+                    "progress",
+                    function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            // Do something with download progress
+                        }
+                    },
+                    false
+                );
 
                 return xhr;
-            }
+            },
         });
     }
 }
@@ -808,3 +824,27 @@ $(document).ready(function(){
 
 
 });
+
+function convertDatetimeFormat(dataStr) {
+    try {
+        const datetimeObj = new Date(dataStr);
+        return (
+            datetimeObj.toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+            }) +
+            ", " +
+            datetimeObj.toLocaleTimeString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                padLeadingZeros: true,
+            })
+        );
+    } catch (error) {
+        console.error(
+            "Invalid datetime format. Please provide a string in 'YYYY-MM-DD HH:MM:SS' format."
+        );
+        return null;
+    }
+}
