@@ -160,7 +160,7 @@ $("img").on("dragstart", function (e) {
 // ---------- Sending Data (Only) By AJAX --------------------------------------------------
 function ajaxCall({ path, method, data }, callback) {
     $.ajax({
-        url: `http://localhost:8001/${path}`,
+        url: `https://be.levri-nabil.space/${path}`,
         type: method,
         dataType: "json",
         data: data,

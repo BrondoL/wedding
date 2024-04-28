@@ -71,7 +71,7 @@ var hideLoader = function() {
 var postData = function({path, data}, onSuccess, onError=null, beforeSend=null) {
     if (data) {
         $.ajax({
-            url: `http://localhost:8001/${path}`,
+            url: `https://be.levri-nabil.space/${path}`,
             type: "POST",
             data: JSON.stringify(data),
             cache: false,
