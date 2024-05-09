@@ -508,7 +508,7 @@ $(document).on(
 ============================== */
 
 // ---------- All Comments (Function) --------------------------------------------------
-const allComments = function() {
+const allComments = function () {
     const path = "api/v1/attendances";
     ajaxCall({ path, method: "GET" }, function (result) {
         $(".total-kehadiran").text(result?.data?.summary?.total ?? 0);
@@ -568,17 +568,29 @@ var post_comment = function (e) {
         return $(form).find('textarea[name="description"]').focus();
     }
 
+    const status = $(form).find('select[name="status"]')[0].value;
+    if (status === "Pilih konfirmasi kehadiran:") {
+        return showAlert(
+            "Silakan konfirmasi kehadiran terlebih dahulu!",
+            "error"
+        );
+    }
+
     if (
-        $(form).find('select[name="status"]')[0].value === "Pilih konfirmasi kehadiran:"
+        status === "hadir" &&
+        $(form).find('input[name="number"]:checked').length === 0
     ) {
-        return showAlert("Silakan konfirmasi kehadiran terlebih dahulu!", "error");
+        return showAlert(
+            "Silakan pilih jumlah kehadiran terlebih dahulu!",
+            "error"
+        );
     }
 
     const payload = {};
     for (var [key, value] of data) {
         if (key === "number") {
             value = parseInt(value, 10);
-            payload[key] = value
+            payload[key] = value;
             continue;
         }
         if (data["status"] !== "hadir" && key === "number") {
@@ -608,7 +620,12 @@ var post_comment = function (e) {
         $(submitButton).html('Mengirim <i class="fas fa-spinner fa-spin"></i>');
     };
 
-    postData({path: "api/v1/attendances", data: payload}, onSuccess, onError, beforeSend);
+    postData(
+        { path: "api/v1/attendances", data: payload },
+        onSuccess,
+        onError,
+        beforeSend
+    );
 };
 
 $(document).on("submit", "form#weddingWishForm", post_comment);
